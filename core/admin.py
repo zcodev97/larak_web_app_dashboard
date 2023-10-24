@@ -1,17 +1,24 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 # Register your models here.
-from .models import User
+from .models import User,UserType
 
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
+
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("username", "password1", "password2",'email','first_name','last_name'),
+                "fields": ("username", "password1", "password2",'email','first_name','last_name','user_type'),
             },
         ),
     )
+
+
+@admin.register(UserType)
+
+class UserTypeAdmin(admin.ModelAdmin):
+   list_display = ['id','title','created_by' , 'created_at']
