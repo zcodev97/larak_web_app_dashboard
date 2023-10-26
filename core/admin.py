@@ -6,7 +6,7 @@ from .models import User,UserType
 
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
-
+    list_display = ['username', 'user_type' ]
     add_fieldsets = (
         (
             None,
