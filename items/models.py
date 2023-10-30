@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from django.contrib.auth.models import User
-from django.conf import settings
+
 
 
 
@@ -10,7 +10,7 @@ class Size(models.Model):
     title = models.CharField(max_length=255)
     # amount = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -19,7 +19,7 @@ class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -38,7 +38,7 @@ class Product(models.Model):
     size = models.ForeignKey(Size,on_delete=models.CASCADE)
     status = models.BooleanField()
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
 
@@ -48,7 +48,7 @@ class Finance(models.Model):
     cart_cost_price = models.FloatField(max_length=100)
     cart_sale_price = models.FloatField(max_length=100)
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class Banner(models.Model):
@@ -56,4 +56,4 @@ class Banner(models.Model):
     image = models.CharField(max_length=255)
     to_product = models.ForeignKey(Product,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)

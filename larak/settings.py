@@ -38,10 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'core',
     'items',
     'orders',
-
 ]
 
 MIDDLEWARE = [
@@ -55,8 +56,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'larak.urls'
-# Custom User Model
-AUTH_USER_MODEL = 'core.User'
 
 TEMPLATES = [
     {
@@ -131,3 +130,21 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+       'rest_framework.renderers.JSONRenderer',
+       'rest_framework.renderers.BrowsableAPIRenderer',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+      'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+      'rest_framework.permissions.DjangoModelPermissions',
+    ),
+    'TOKEN_EXPIRE': 604800,  # Set to 7 days (604800 seconds)
+
+}
+
+# Custom User Model
+# AUTH_USER_MODEL = 'core.User'
